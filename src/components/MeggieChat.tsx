@@ -42,9 +42,9 @@ export const MeggieChat = () => {
     setMessages(prev => [...prev, userMessage]);
     setIsLoading(true);
 
-    // Simulate Meggie's response with a delay
-    setTimeout(() => {
-      const response = generateMeggieResponse(messageText);
+    try {
+      // Get Meggie's AI-powered response
+      const response = await generateMeggieResponse(messageText);
       const meggieMessage: Message = {
         id: (Date.now() + 1).toString(),
         text: response,
@@ -53,8 +53,18 @@ export const MeggieChat = () => {
       };
 
       setMessages(prev => [...prev, meggieMessage]);
+    } catch (error) {
+      console.error('Error generating response:', error);
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "Oops! I'm having a little trouble right now 😅 But I'm still here to help! Try asking me again, or tell me what ingredients you have and I'll work with my backup recipes! 💕",
+        isUser: false,
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
       setIsLoading(false);
-    }, 1000 + Math.random() * 1000); // 1-2 second delay for realism
+    }
   };
 
   return (

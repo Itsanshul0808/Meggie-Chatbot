@@ -23,40 +23,51 @@ const commonIngredients = {
 
 const recipes: Record<string, Recipe> = {
   "rice_tomato": {
-    name: "Simple Tomato Rice",
-    ingredients: ["rice", "tomatoes", "salt", "oil"],
+    name: "Aromatic Hostel-Style Tomato Rice",
+    ingredients: ["1 cup basmati rice", "3-4 medium tomatoes", "1 large onion", "2-3 garlic cloves", "1 tsp cumin seeds", "1/2 tsp turmeric", "1 tsp red chili powder", "salt to taste", "3 tbsp cooking oil", "fresh coriander leaves"],
     steps: [
-      "Boil rice until 70% cooked, drain and set aside",
-      "Heat oil in pan, add chopped tomatoes",
-      "Cook tomatoes until mushy, add salt",
-      "Mix in the rice and cook for 5 more minutes",
-      "Serve hot! 🍚"
+      "Wash and soak rice for 15 minutes, then boil with salt until 70% cooked (8-10 mins). Drain and set aside.",
+      "Heat oil in a heavy-bottomed pan. Add cumin seeds and let them splutter.",
+      "Add finely chopped onions and sauté until golden brown (5-6 minutes).",
+      "Add minced garlic and cook for 1 minute until fragrant.",
+      "Add chopped tomatoes, turmeric, and chili powder. Cook until tomatoes break down completely (8-10 minutes).",
+      "Gently fold in the parboiled rice. Add salt and mix carefully to avoid breaking grains.",
+      "Cover and cook on low heat for 10-12 minutes until rice is fully cooked.",
+      "Garnish with fresh coriander and serve hot with raita or pickle! 🍚✨"
     ],
-    tips: "No onions? No problem! Add a tiny bit of ketchup for extra flavor 😉"
+    tips: "Pro tip: Add a bay leaf while boiling rice for extra aroma! No garlic? Use ginger instead. Save time by using canned tomatoes when fresh ones are expensive."
   },
   "egg_rice": {
-    name: "Quick Egg Fried Rice",
-    ingredients: ["rice", "eggs", "salt", "oil"],
+    name: "Restaurant-Style Egg Fried Rice",
+    ingredients: ["2 cups cooked rice (preferably day-old)", "3 eggs", "1 medium onion", "2 spring onions", "2 cloves garlic", "1 tbsp soy sauce", "1 tsp vinegar", "1/2 tsp black pepper", "salt to taste", "3 tbsp oil"],
     steps: [
-      "Cook rice and let it cool (day-old rice works best!)",
-      "Scramble eggs in a pan with oil and salt",
-      "Add rice to the same pan and mix well",
-      "Stir-fry for 3-4 minutes until heated through",
-      "Enjoy your protein-packed meal! 🍳"
+      "Beat eggs with a pinch of salt and black pepper. Set aside.",
+      "Heat 1 tbsp oil in a large pan or wok on high heat.",
+      "Pour beaten eggs and scramble quickly. Remove and set aside.",
+      "Heat remaining oil, add minced garlic and chopped onions. Stir-fry for 2-3 minutes.",
+      "Add cold rice, breaking up any clumps with a spatula.",
+      "Stir-fry rice for 3-4 minutes until heated through and slightly crispy.",
+      "Add soy sauce, vinegar, and scrambled eggs back to the pan.",
+      "Toss everything together for 2 minutes. Garnish with chopped spring onions.",
+      "Serve immediately while hot! 🍳🥢"
     ],
-    tips: "Add any leftover veggies you have - they'll taste amazing!"
+    tips: "Secret: Use day-old rice for the best texture! Add frozen mixed vegetables for extra nutrition. No soy sauce? Mix ketchup with a little water and salt!"
   },
   "maggi_upgrade": {
-    name: "Hostel Special Masala Maggi",
-    ingredients: ["maggi noodles", "onion", "tomato", "egg (optional)"],
+    name: "Gourmet Hostel Masala Maggi Bowl",
+    ingredients: ["2 packets maggi noodles", "1 large onion", "2 tomatoes", "2 eggs", "1 green chili", "1 tsp ginger-garlic paste", "1/2 tsp garam masala", "1 tsp red chili powder", "fresh coriander", "2 tbsp oil", "cheese slice (optional)"],
     steps: [
-      "Boil water, add maggi and cook for 1 minute",
-      "In another pan, sauté chopped onions and tomatoes",
-      "Beat an egg and scramble it in the same pan (if using)",
-      "Mix the cooked maggi with the veggie-egg mixture",
-      "Your fancy maggi is ready! 🍜"
+      "Boil water in a large pot. Add maggi noodles (reserve one masala packet) and cook for 2 minutes. Drain and set aside.",
+      "Heat oil in a deep pan. Add chopped onions and green chili, sauté until onions turn pink.",
+      "Add ginger-garlic paste and cook for 1 minute until aromatic.",
+      "Add chopped tomatoes, reserved masala packet, chili powder, and garam masala. Cook until tomatoes are soft (5-6 minutes).",
+      "Beat eggs and pour into the pan. Scramble with the masala mixture.",
+      "Add the cooked noodles and toss everything together for 2-3 minutes.",
+      "Add a splash of water if too dry. Cook for another 2 minutes.",
+      "Garnish with fresh coriander and cheese slice if available.",
+      "Serve in bowls with a cup of chai! 🍜🔥"
     ],
-    tips: "This trick makes instant noodles feel like a proper meal!"
+    tips: "Level up: Add capsicum, carrots, or any leftover vegetables. Make it creamy by adding a spoonful of mayonnaise at the end. Freeze the extra masala packets for future use!"
   }
 };
 
@@ -105,13 +116,62 @@ const formatRecipe = (recipe: Recipe): string => {
   return response;
 };
 
-export const generateMeggieResponse = (userMessage: string): string => {
+// Function to call AI for recipe generation
+export const generateAIRecipe = async (ingredients: string[], preferences?: string, budget?: string, time?: string): Promise<string> => {
+  try {
+    const response = await fetch('/api/generate-recipe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ingredients,
+        preferences,
+        budget,
+        time
+      }),
+    });
+
+    const data = await response.json();
+    
+    if (!response.ok) {
+      return data.fallback || "I'm having trouble with my recipe generator right now! Let me give you one of my tried-and-tested favorites instead. 😊";
+    }
+
+    return data.recipe;
+  } catch (error) {
+    console.error('Error generating AI recipe:', error);
+    return "Sorry, I'm having trouble connecting to my recipe brain! 😅 But I can still help with some basic recipes. What specific dish are you thinking of?";
+  }
+};
+
+export const generateMeggieResponse = async (userMessage: string): Promise<string> => {
   const lowerMessage = userMessage.toLowerCase();
   
   // Detect ingredients
   const ingredients = getDetectedIngredients(userMessage);
   
-  // Check for specific recipe matches
+  // Check if user wants AI-generated recipe (has multiple ingredients or asks for something creative)
+  if (ingredients.length >= 2 || lowerMessage.includes("recipe") || lowerMessage.includes("cook") || lowerMessage.includes("make")) {
+    // Extract preferences from message
+    let preferences = "";
+    let budget = "";
+    let time = "";
+    
+    if (lowerMessage.includes("vegetarian") || lowerMessage.includes("veg")) preferences += "vegetarian ";
+    if (lowerMessage.includes("spicy")) preferences += "spicy ";
+    if (lowerMessage.includes("mild")) preferences += "mild ";
+    if (lowerMessage.includes("quick") || lowerMessage.includes("fast")) time = "15";
+    if (lowerMessage.includes("budget") || lowerMessage.includes("cheap")) budget = "₹50";
+    
+    // Try AI recipe generation first
+    const aiRecipe = await generateAIRecipe(ingredients, preferences, budget, time);
+    if (aiRecipe && !aiRecipe.includes("trouble") && !aiRecipe.includes("Sorry")) {
+      return aiRecipe;
+    }
+  }
+  
+  // Fallback to existing recipe logic
   const recipeKey = getRecipeKey(ingredients);
   if (recipeKey && recipes[recipeKey]) {
     return formatRecipe(recipes[recipeKey]);
@@ -119,33 +179,33 @@ export const generateMeggieResponse = (userMessage: string): string => {
   
   // Handle common queries
   if (lowerMessage.includes("breakfast")) {
-    return "Good morning! 🌅 For a quick hostel breakfast, try:\n\n• Bread omelette (if you have eggs)\n• Poha with tea (if available)\n• Simple upma with semolina\n• Or just some good old toast with whatever spread you have!\n\nWhat ingredients do you have right now? I'll help you make something yummy! 😊";
+    return "Good morning! 🌅 For a delicious hostel breakfast, try:\n\n• **Masala Scrambled Eggs** - with onions, tomatoes, and green chilies\n• **Poha Upma** - quick and filling with minimal ingredients\n• **French Toast** - if you have bread, eggs, and milk\n• **Oats Porridge** - healthy and customizable with any toppings\n\nTell me what ingredients you have, and I'll create a detailed breakfast recipe just for you! 😊";
   }
   
   if (lowerMessage.includes("budget") || lowerMessage.includes("cheap") || lowerMessage.includes("₹50") || lowerMessage.includes("money")) {
-    return "I totally get it - hostel life and budgets! 💕\n\nHere are my go-to budget meals:\n• Rice + dal (₹20-30)\n• Maggi with egg (₹25-35)\n• Bread omelette (₹20-30)\n• Simple rice with pickle (₹15-20)\n\nTell me what you have in your room right now, and I'll help you create something filling and delicious! Remember, the best meals come from the heart, not the wallet! 🌸";
+    return "I totally get it - hostel life and budgets! 💕\n\nHere are my **detailed budget meals**:\n• **Dal Rice Bowl** (₹25-35) - protein-rich and filling\n• **Masala Maggi Deluxe** (₹30-40) - upgraded with eggs and veggies\n• **Spiced Bread Omelette** (₹20-30) - restaurant-style technique\n• **Simple Khichdi** (₹20-25) - comfort food at its best\n\nShare your exact ingredients and budget, and I'll create a **step-by-step gourmet recipe** that'll make your friends jealous! 🌸";
   }
   
   if (lowerMessage.includes("no ingredients") || lowerMessage.includes("nothing") || lowerMessage.includes("empty")) {
-    return "Oh honey! 😅 Been there, done that! When the hostel kitchen looks like a desert...\n\nQuick fixes:\n• Check if anyone has extra bread/maggi to share\n• See if the hostel mess has anything\n• Emergency: Just tea/coffee with some biscuits\n• Time for a quick grocery run? Rice + dal + oil covers many meals!\n\nDon't worry, we've all survived on creative 'nothing' meals. Tomorrow will be better! 💪 What's your situation right now?";
+    return "Oh honey! 😅 The classic empty-hostel-kitchen situation!\n\n**Emergency Solutions:**\n• **Community Cooking** - team up with roommates for shared ingredients\n• **Mess Hall Hacks** - see what's available there\n• **Quick Store Run** - ₹100 can get you rice, dal, oil, and onions for multiple meals\n• **Tea & Biscuits** - sometimes that's all we need\n\n**Survival Kit for Next Time:** Rice, dal, oil, onions, salt, and chili powder - these 6 items can make 20+ different dishes! \n\nWhat's your current situation? I might have some creative solutions! 💪";
   }
   
   if (ingredients.length > 0) {
-    let response = `I can see you have ${ingredients.join(", ")}! 😊\n\n`;
+    let response = `Ooh, I can see you have **${ingredients.join(", ")}**! 😊 That's a great start!\n\n`;
     
-    // Provide general suggestions based on ingredients
+    // Provide detailed suggestions based on ingredients
     if (ingredients.includes("rice")) {
-      response += "With rice, you can make so many things! Plain rice with any curry, fried rice if you have some veggies or eggs, or even sweet rice with a bit of sugar!\n\n";
+      response += "**Rice possibilities:** Fried rice, biryani-style rice, tomato rice, lemon rice, or even sweet rice for dessert!\n\n";
     }
     
     if (ingredients.includes("egg")) {
-      response += "Eggs are like magic in hostel cooking! 🥚 Scrambled, omelette, or just boiled - they make everything better!\n\n";
+      response += "**Egg magic:** Scrambled masala eggs, egg curry, egg fried rice, or a fluffy omelette with whatever veggies you have!\n\n";
     }
     
-    response += "Tell me exactly what you have, and I'll give you a step-by-step recipe that'll make your hostel room smell like home! 🏠✨";
+    response += "Give me the **complete list** of what you have (including spices, oil, etc.), and I'll create a **detailed, restaurant-quality recipe** that'll make your hostel room smell amazing! 🏠✨";
     return response;
   }
   
   // Default caring response
-  return "Hey there! 😊 I'm here to help you whip up something delicious with whatever you have! \n\nJust tell me:\n• What ingredients are in your hostel kitchen right now?\n• Any specific cravings?\n• How much time do you have?\n\nI promise we'll make something that'll have your hostel friends asking for the recipe! What do you say? 🌸";
+  return "Hey there! 😊 I'm Meggie, your personal hostel kitchen assistant! I'm here to help you create **amazing meals** with whatever you have! \n\n**Just tell me:**\n• What ingredients are in your kitchen right now?\n• Any specific cravings or dietary preferences?\n• How much time do you have to cook?\n• What's your budget like?\n\nI'll create **detailed, step-by-step recipes** that'll have your hostel friends begging for the secret! Ready to cook something incredible? 🌸✨";
 };
