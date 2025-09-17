@@ -47,6 +47,12 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Custom Meggie colors
+        "warm-peach": "hsl(var(--warm-peach))",
+        "soft-sage": "hsl(var(--soft-sage))",
+        "creamy-white": "hsl(var(--creamy-white))",
+        "warm-orange": "hsl(var(--warm-orange))",
+        "cozy-brown": "hsl(var(--cozy-brown))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
