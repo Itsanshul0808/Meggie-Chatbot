@@ -1,0 +1,262 @@
+{
+  "maggi masala": {
+    "name": "Hostel Special Maggi",
+    "ingredients": ["maggi noodles", "onion", "tomato", "green chilies", "garam masala", "oil"],
+    "steps": [
+      "Heat oil in pan, add chopped onions and green chilies",
+      "Add tomatoes and cook until soft",
+      "Add water and bring to boil",
+      "Add maggi noodles and masala packet",
+      "Cook for 2-3 minutes, add garam masala and serve hot"
+    ],
+    "time": "8 minutes",
+    "hostel_tip": "Add an egg while cooking for extra protein! No veggies? Just use the masala packet."
+  },
+  "poha": {
+    "name": "Classic Poha",
+    "ingredients": ["poha", "onion", "mustard seeds", "curry leaves", "turmeric", "oil", "salt"],
+    "steps": [
+      "Rinse poha in water and drain well",
+      "Heat oil, add mustard seeds and curry leaves",
+      "Add chopped onions, cook until golden",
+      "Add turmeric and drained poha",
+      "Mix gently, add salt and cook for 3-4 minutes"
+    ],
+    "time": "15 minutes",
+    "hostel_tip": "No curry leaves? Skip them! Add peanuts for crunch if available."
+  },
+  "bread omelette": {
+    "name": "Hostel Bread Omelette",
+    "ingredients": ["bread", "eggs", "onion", "green chilies", "salt", "oil"],
+    "steps": [
+      "Beat eggs with salt, chopped onions and chilies",
+      "Heat oil in pan",
+      "Pour egg mixture and place bread slice on top",
+      "Flip when bottom is cooked",
+      "Cook other side and serve hot"
+    ],
+    "time": "10 minutes",
+    "hostel_tip": "Use a non-stick pan if available. Add cheese slice for extra taste!"
+  },
+  "chapati pizza": {
+    "name": "Chapati Pizza",
+    "ingredients": ["chapati", "tomato sauce", "cheese", "onion", "capsicum", "oregano"],
+    "steps": [
+      "Spread tomato sauce on chapati",
+      "Add chopped onions and capsicum",
+      "Sprinkle grated cheese on top",
+      "Heat in pan with lid covered for 5 minutes",
+      "Sprinkle oregano and serve"
+    ],
+    "time": "10 minutes",
+    "hostel_tip": "No oven needed! A pan with lid works perfectly. Use any leftover chapati."
+  },
+  "paneer butter masala": {
+    "name": "Quick Paneer Butter Masala",
+    "ingredients": ["paneer", "butter", "tomato", "cream", "garam masala", "kasuri methi"],
+    "steps": [
+      "Fry paneer cubes in butter until golden",
+      "Add chopped tomatoes and cook until soft",
+      "Add cream, garam masala and kasuri methi",
+      "Mix paneer into sauce and simmer for 5 minutes",
+      "Serve hot with chapati or rice"
+    ],
+    "time": "20 minutes",
+    "hostel_tip": "No cream? Use milk with a spoon of ghee. Frozen paneer works too!"
+  },
+  "dal tadka": {
+    "name": "Simple Dal Tadka",
+    "ingredients": ["toor dal", "onion", "tomato", "cumin seeds", "turmeric", "ghee", "salt"],
+    "steps": [
+      "Pressure cook dal with turmeric and salt",
+      "Heat ghee, add cumin seeds",
+      "Add onions, cook until golden",
+      "Add tomatoes, cook until soft",
+      "Mix cooked dal and simmer for 5 minutes"
+    ],
+    "time": "25 minutes",
+    "hostel_tip": "Pressure cooker saves time! No ghee? Regular oil works fine."
+  },
+  "aloo paratha": {
+    "name": "Stuffed Aloo Paratha",
+    "ingredients": ["atta", "potato", "green chilies", "garam masala", "oil", "salt"],
+    "steps": [
+      "Boil and mash potatoes with spices and chilies",
+      "Make dough with atta and water",
+      "Roll dough, stuff with potato mixture",
+      "Seal and roll again carefully",
+      "Cook on tawa with oil until golden both sides"
+    ],
+    "time": "30 minutes",
+    "hostel_tip": "Leftover boiled potatoes work great! Serve with curd or pickle."
+  },
+  "egg curry": {
+    "name": "Hostel Egg Curry",
+    "ingredients": ["eggs", "onion", "tomato", "ginger-garlic paste", "red chili powder", "turmeric", "oil"],
+    "steps": [
+      "Boil eggs and peel them",
+      "Heat oil, add onions and ginger-garlic paste",
+      "Add tomatoes and spices, cook until thick",
+      "Add little water to make gravy",
+      "Add boiled eggs and simmer for 5 minutes"
+    ],
+    "time": "20 minutes",
+    "hostel_tip": "Pre-boil eggs when you have time. Tastes better the next day!"
+  },
+  "rajma": {
+    "name": "Quick Rajma",
+    "ingredients": ["rajma", "onion", "tomato", "ginger-garlic paste", "cumin seeds", "garam masala", "oil"],
+    "steps": [
+      "Soak rajma overnight and pressure cook",
+      "Heat oil, add cumin seeds and onions",
+      "Add ginger-garlic paste and tomatoes",
+      "Add cooked rajma with its water",
+      "Add garam masala and simmer for 10 minutes"
+    ],
+    "time": "45 minutes",
+    "hostel_tip": "Use canned kidney beans to save time! Mash few beans for thick gravy."
+  },
+  "upma": {
+    "name": "Vegetable Upma",
+    "ingredients": ["semolina", "onion", "green chilies", "mustard seeds", "curry leaves", "oil", "salt"],
+    "steps": [
+      "Dry roast semolina until aromatic",
+      "Heat oil, add mustard seeds and curry leaves",
+      "Add onions and chilies, cook until soft",
+      "Add 2 cups water and salt, bring to boil",
+      "Slowly add roasted semolina while stirring"
+    ],
+    "time": "15 minutes",
+    "hostel_tip": "Keep stirring to avoid lumps! Add any vegetables you have."
+  },
+  "khichdi": {
+    "name": "Comfort Khichdi",
+    "ingredients": ["rice", "moong dal", "turmeric", "cumin seeds", "ghee", "salt"],
+    "steps": [
+      "Wash rice and dal together",
+      "Heat ghee, add cumin seeds",
+      "Add rice-dal mixture and turmeric",
+      "Add 4 cups water and salt",
+      "Pressure cook for 3-4 whistles"
+    ],
+    "time": "20 minutes",
+    "hostel_tip": "Perfect comfort food when sick! Add vegetables for nutrition."
+  },
+  "curd rice": {
+    "name": "South Indian Curd Rice",
+    "ingredients": ["rice", "curd", "mustard seeds", "curry leaves", "green chilies", "oil", "salt"],
+    "steps": [
+      "Cook rice and let it cool",
+      "Mix rice with beaten curd and salt",
+      "Heat oil, add mustard seeds and curry leaves",
+      "Add green chilies and pour over rice",
+      "Mix well and serve"
+    ],
+    "time": "15 minutes",
+    "hostel_tip": "Great for hot weather! Add chopped cucumber for crunch."
+  },
+  "besan chilla": {
+    "name": "Protein-Rich Besan Chilla",
+    "ingredients": ["besan", "onion", "green chilies", "coriander", "turmeric", "oil", "salt"],
+    "steps": [
+      "Mix besan with water to make smooth batter",
+      "Add chopped onions, chilies, coriander and spices",
+      "Heat oil in pan",
+      "Pour batter and spread like pancake",
+      "Cook both sides until golden"
+    ],
+    "time": "15 minutes",
+    "hostel_tip": "High protein breakfast! Serve with chutney or ketchup."
+  },
+  "masala chai": {
+    "name": "Perfect Masala Chai",
+    "ingredients": ["tea leaves", "milk", "sugar", "ginger", "cardamom", "water"],
+    "steps": [
+      "Boil water with ginger and cardamom",
+      "Add tea leaves and boil for 2 minutes",
+      "Add milk and sugar",
+      "Boil until desired color and strain",
+      "Serve hot"
+    ],
+    "time": "8 minutes",
+    "hostel_tip": "Use tea bags if no loose tea. Adjust milk and sugar to taste."
+  },
+  "bhel puri": {
+    "name": "Quick Bhel Puri",
+    "ingredients": ["puffed rice", "sev", "onion", "tomato", "coriander", "tamarind chutney", "green chutney"],
+    "steps": [
+      "Mix puffed rice with chopped onions and tomatoes",
+      "Add both chutneys as per taste",
+      "Mix well and top with sev",
+      "Garnish with coriander",
+      "Serve immediately"
+    ],
+    "time": "5 minutes",
+    "hostel_tip": "Buy ready-made chutneys to save time! Eat quickly before it gets soggy."
+  },
+  "pasta masala": {
+    "name": "Indian Style Pasta",
+    "ingredients": ["pasta", "onion", "tomato", "capsicum", "garam masala", "tomato sauce", "oil"],
+    "steps": [
+      "Boil pasta with salt until cooked",
+      "Heat oil, add onions and capsicum",
+      "Add tomatoes and garam masala",
+      "Add tomato sauce and cooked pasta",
+      "Mix well and cook for 3 minutes"
+    ],
+    "time": "20 minutes",
+    "hostel_tip": "Any pasta shape works! Add cheese if available for creaminess."
+  },
+  "sandwich": {
+    "name": "Bombay Sandwich",
+    "ingredients": ["bread", "potato", "cucumber", "tomato", "onion", "green chutney", "butter"],
+    "steps": [
+      "Boil and slice potatoes",
+      "Slice cucumber, tomato and onion",
+      "Apply butter and green chutney on bread",
+      "Layer vegetables between bread slices",
+      "Grill in sandwich maker or pan"
+    ],
+    "time": "15 minutes",
+    "hostel_tip": "No sandwich maker? Use a heavy pan to press down while cooking!"
+  },
+  "lemon rice": {
+    "name": "Tangy Lemon Rice",
+    "ingredients": ["rice", "lemon", "mustard seeds", "curry leaves", "turmeric", "peanuts", "oil"],
+    "steps": [
+      "Cook rice and let it cool",
+      "Heat oil, add mustard seeds and curry leaves",
+      "Add peanuts and fry until golden",
+      "Add turmeric and pour over rice",
+      "Add lemon juice and mix gently"
+    ],
+    "time": "15 minutes",
+    "hostel_tip": "Use leftover rice! Add more lemon for extra tang."
+  },
+  "aloo tikki": {
+    "name": "Crispy Aloo Tikki",
+    "ingredients": ["potato", "bread crumbs", "green chilies", "coriander", "garam masala", "oil"],
+    "steps": [
+      "Boil and mash potatoes",
+      "Mix with spices, chilies and coriander",
+      "Shape into patties and coat with bread crumbs",
+      "Shallow fry until golden brown",
+      "Serve hot with chutney"
+    ],
+    "time": "25 minutes",
+    "hostel_tip": "Make extra and freeze for later! Tastes great with ketchup too."
+  },
+  "vegetable pulao": {
+    "name": "One-Pot Vegetable Pulao",
+    "ingredients": ["basmati rice", "mixed vegetables", "whole spices", "onion", "ghee", "salt"],
+    "steps": [
+      "Soak rice for 30 minutes",
+      "Heat ghee, add whole spices and onions",
+      "Add vegetables and fry for 5 minutes",
+      "Add rice and water (1:2 ratio)",
+      "Cook covered until rice is done"
+    ],
+    "time": "35 minutes",
+    "hostel_tip": "Use frozen mixed vegetables to save chopping time!"
+  }
+}
