@@ -15,11 +15,33 @@ serve(async (req) => {
     const { ingredients, preferences, budget, time } = await req.json()
 
     const openaiApiKey = Deno.env.get('OPENAI_API_KEY')
+    const spoonacularApiKey = Deno.env.get('SPOONACULAR_API_KEY')
+    
     if (!openaiApiKey) {
       throw new Error('OpenAI API key not configured')
     }
 
-    const prompt = `You are Meggie, a sweet and caring kitchen assistant for hostel students. Create a detailed, step-by-step recipe using these ingredients: ${ingredients.join(', ')}.
+    // Get recipe suggestions from Spoonacular if API key is available
+    let spoonacularRecipes = []
+    if (spoonacularApiKey && ingredients.length > 0) {
+      try {
+        const spoonacularResponse = await fetch(
+          `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients.join(',')}&number=3&apiKey=${spoonacularApiKey}`
+        )
+        if (spoonacularResponse.ok) {
+          spoonacularRecipes = await spoonacularResponse.json()
+        }
+      } catch (error) {
+        console.log('Spoonacular API error:', error)
+      }
+    }
+
+    // Include Spoonacular recipe suggestions in the prompt if available
+    const spoonacularContext = spoonacularRecipes.length > 0 
+      ? `\n\nInspiration from real recipes: ${spoonacularRecipes.map(r => r.title).join(', ')}`
+      : '';
+
+    const prompt = `You are Meggie, a sweet and caring kitchen assistant for hostel students. Create a detailed, step-by-step recipe using these ingredients: ${ingredients.join(', ')}.${spoonacularContext}
 
 Requirements:
 - Make it suitable for hostel cooking (basic equipment)
