@@ -14,11 +14,11 @@ serve(async (req) => {
   try {
     const { ingredients, preferences, budget, time } = await req.json()
 
-    const openaiApiKey = Deno.env.get('OPENAI_API_KEY')
+    const geminiApiKey = Deno.env.get('GEMINI_API_KEY')
     const spoonacularApiKey = Deno.env.get('SPOONACULAR_API_KEY')
     
-    if (!openaiApiKey) {
-      throw new Error('OpenAI API key not configured')
+    if (!geminiApiKey) {
+      throw new Error('Gemini API key not configured')
     }
 
     // Get recipe suggestions from Spoonacular if API key is available
@@ -79,36 +79,33 @@ Format your response as:
 
 Keep it conversational, encouraging, and include emojis sparingly. Make the recipe complex enough to feel like a proper cooking experience, not just basic instructions.`
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${geminiApiKey}`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${openaiApiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
-        messages: [
-          {
-            role: 'system',
-            content: 'You are Meggie, a caring kitchen assistant who helps hostel students cook delicious meals. Be warm, encouraging, and provide detailed but accessible recipes.'
-          },
-          {
-            role: 'user',
-            content: prompt
-          }
-        ],
-        max_tokens: 1500,
-        temperature: 0.7,
+        contents: [{
+          parts: [{
+            text: `You are Meggie, a caring kitchen assistant who helps hostel students cook delicious meals. Be warm, encouraging, and provide detailed but accessible recipes.\n\n${prompt}`
+          }]
+        }],
+        generationConfig: {
+          temperature: 0.7,
+          topK: 1,
+          topP: 1,
+          maxOutputTokens: 2048,
+        }
       }),
     })
 
     const data = await response.json()
     
     if (!response.ok) {
-      throw new Error(`OpenAI API error: ${data.error?.message || 'Unknown error'}`)
+      throw new Error(`Gemini API error: ${data.error?.message || 'Unknown error'}`)
     }
 
-    const recipe = data.choices[0]?.message?.content || 'Sorry, I couldn\'t generate a recipe right now. Try again!'
+    const recipe = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Sorry, I couldn\'t generate a recipe right now. Try again!'
 
     return new Response(
       JSON.stringify({ recipe }),
